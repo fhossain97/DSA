@@ -192,3 +192,37 @@ console.log(
     "dog"
   )
 );
+
+//Two-pointers
+function search(arr, target) {
+  for (let left = 0; left < arr.length; ) {
+    for (let right = arr.length - 1; right < arr.length; ) {
+      const sum = arr[left] + arr[right];
+
+      if (sum === target) {
+        return [left, right];
+      } else if (sum < target) {
+        left++;
+      } else if (sum > target) {
+        right--;
+      }
+    }
+  }
+
+  return [-1, -1];
+}
+console.log(search([0, 1, 2, 3, 4], 0));
+
+function moveElements(arr) {
+  let uniqueIndex = 0;
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[uniqueIndex] !== arr[i]) {
+      uniqueIndex++;
+      arr[uniqueIndex] = arr[i];
+    }
+  }
+  return uniqueIndex + 1;
+}
+
+console.log(moveElements([2, 3, 3, 3, 6, 9, 9]));
+console.log(moveElements([2, 2, 2, 11]));
