@@ -226,3 +226,35 @@ function moveElements(arr) {
 
 console.log(moveElements([2, 3, 3, 3, 6, 9, 9]));
 console.log(moveElements([2, 2, 2, 11]));
+
+function makeSquares(arr) {
+  return arr.map((a) => a * a).sort();
+}
+
+console.log(makeSquares([-3, -1, 0, 1, 2]));
+
+function searchForTriplets(arr) {
+  const pairs = [];
+  arr.sort((a, b) => a - b);
+  for (let current = 0; current < arr.length; current++) {
+    let left = current + 1;
+    let right = arr.length - 1;
+    let target = -arr[current];
+    while (left < right) {
+      const sum = arr[left] + arr[right];
+
+      if (sum === target) {
+        pairs.push([-target, arr[left], arr[right]]);
+        left++;
+        right--;
+      } else if (sum < target) {
+        left++;
+      } else {
+        right--;
+      }
+    }
+  }
+  return pairs;
+}
+
+console.log(searchForTriplets([-5, 2, -1, -2, 3]));
