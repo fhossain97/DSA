@@ -1,9 +1,11 @@
 //Warmup
+//Contains Duplicate
 const containsDuplicates = (nums) => {
   return Array.from(new Set(nums)).length === nums.length;
 };
 console.log(containsDuplicates([1, 2, 3, 4]));
 
+//Pangram (easy)
 const isPangram = (sentence) => {
   const acceptedChars = [
     "a",
@@ -44,6 +46,7 @@ const isPangram = (sentence) => {
 };
 console.log(isPangram("TheQuickBrownFoxJumpsOverTheLazyDog"));
 
+//Sqrt
 function mySqrt(num) {
   function formatNum(n) {
     return Math.abs(Math.floor(n));
@@ -72,6 +75,7 @@ function mySqrt(num) {
 
 console.log(mySqrt(27));
 
+//Number of Good Pairs
 function goodPairs(nums) {
   let count = 0;
   for (let f = 0; f < nums.length; f++) {
@@ -85,6 +89,7 @@ function goodPairs(nums) {
 }
 console.log(goodPairs([1, 2, 3, 1, 1, 3]));
 
+//Reverse Vowels
 function reverseVowels(word) {
   const vowels = ["a", "e", "i", "o", "u"];
   const notVowel = [];
@@ -106,6 +111,7 @@ function reverseVowels(word) {
 
 console.log(reverseVowels("DesignGUrus"));
 
+//Valid Palindrome
 const isPalindrome = (sentence) => {
   const alphanumeric = [
     "a",
@@ -160,6 +166,8 @@ console.log(isPalindrome("Was it a car or a cat I saw?"));
 function sortLetters(word) {
   return word.toLowerCase().trim().split("").sort().join("");
 }
+
+//Valid Anagram
 const isAnagram = (s, t) => {
   return sortLetters(s) === sortLetters(t);
 };
@@ -174,6 +182,8 @@ function getIndices(arr, word) {
     })
     .filter((x) => x !== undefined);
 }
+
+//Shortest Word Distance
 const shortestWordDistance = (arr, s, t) => {
   const a = getIndices(arr, s);
   const b = getIndices(arr, t);
@@ -194,6 +204,7 @@ console.log(
 );
 
 //Two-pointers
+//Pair with Target Sum
 function search(arr, target) {
   for (let left = 0; left < arr.length; ) {
     for (let right = arr.length - 1; right < arr.length; ) {
@@ -213,6 +224,7 @@ function search(arr, target) {
 }
 console.log(search([0, 1, 2, 3, 4], 0));
 
+//Find Non-Duplicate Number Instances
 function moveElements(arr) {
   let uniqueIndex = 0;
   for (let i = 1; i < arr.length; i++) {
@@ -227,12 +239,14 @@ function moveElements(arr) {
 console.log(moveElements([2, 3, 3, 3, 6, 9, 9]));
 console.log(moveElements([2, 2, 2, 11]));
 
+//Squaring a Sorted Array
 function makeSquares(arr) {
   return arr.map((a) => a * a).sort();
 }
 
 console.log(makeSquares([-3, -1, 0, 1, 2]));
 
+//Triplet Sum to Zero
 function searchForTriplets(arr) {
   const pairs = [];
   arr.sort((a, b) => a - b);
@@ -259,6 +273,7 @@ function searchForTriplets(arr) {
 
 console.log(searchForTriplets([-5, 2, -1, -2, 3]));
 
+//Triplet Sum Close to Target
 function searchTriplet(arr, target) {
   arr.sort((a, b) => a - b);
   const smallest = [];
@@ -283,6 +298,7 @@ function searchTriplet(arr, target) {
 
 console.log(searchTriplet([0, 0, 1, 1, 2, 6], 5));
 
+//Triplets with Smaller Sum
 function searchTriplets(arr, target) {
   let count = 0;
   arr.sort((a, b) => a - b);
