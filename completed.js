@@ -258,3 +258,48 @@ function searchForTriplets(arr) {
 }
 
 console.log(searchForTriplets([-5, 2, -1, -2, 3]));
+
+function searchTriplet(arr, target) {
+  arr.sort((a, b) => a - b);
+  const smallest = [];
+  for (let i = 0; i < arr.length; i++) {
+    let left = i + 1;
+    let right = arr.length - 1;
+    while (left < right) {
+      const difference = Math.abs(target - (arr[left] + arr[right] + arr[i]));
+      if (difference === 0) {
+        return sum;
+      }
+      smallest.push(difference);
+      if (difference > 0) {
+        left++;
+      } else {
+        right--;
+      }
+    }
+  }
+  return target - Math.min(...smallest);
+}
+
+console.log(searchTriplet([0, 0, 1, 1, 2, 6], 5));
+
+function searchTriplets(arr, target) {
+  let count = 0;
+  arr.sort((a, b) => a - b);
+  for (let i = 0; i < arr.length; i++) {
+    let left = i + 1;
+    let right = arr.length - 1;
+    while (left < right) {
+      const sum = arr[left] + arr[right];
+      if (sum < target - arr[i]) {
+        count += right - left;
+        left++;
+      } else {
+        right--;
+      }
+    }
+  }
+  return count;
+}
+
+console.log(searchTriplets([-1, 4, 2, 1, 3], 5));
