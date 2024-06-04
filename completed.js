@@ -1,11 +1,11 @@
 //Warmup
 //Contains Duplicate
 const containsDuplicates = (nums) => {
-  return Array.from(new Set(nums)).length === nums.length;
+  return Array.from(new Set(nums)).length !== nums.length;
 };
 console.log(containsDuplicates([1, 2, 3, 4]));
 
-//Pangram (easy)
+//Pangram (
 const isPangram = (sentence) => {
   const acceptedChars = [
     "a",
@@ -163,16 +163,17 @@ const isPalindrome = (sentence) => {
 
 console.log(isPalindrome("Was it a car or a cat I saw?"));
 
+//Valid Anagram
 function sortLetters(word) {
   return word.toLowerCase().trim().split("").sort().join("");
 }
 
-//Valid Anagram
 const isAnagram = (s, t) => {
   return sortLetters(s) === sortLetters(t);
 };
 console.log(isAnagram("rat", "car"));
 
+//Shortest Word Distance
 function getIndices(arr, word) {
   return arr
     .map((a, idx) => {
@@ -183,7 +184,6 @@ function getIndices(arr, word) {
     .filter((x) => x !== undefined);
 }
 
-//Shortest Word Distance
 const shortestWordDistance = (arr, s, t) => {
   const a = getIndices(arr, s);
   const b = getIndices(arr, t);
@@ -319,3 +319,89 @@ function searchTriplets(arr, target) {
 }
 
 console.log(searchTriplets([-1, 4, 2, 1, 3], 5));
+
+// Subarrays with Product Less than a Target
+function findSubarrays(arr, target) {
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    let j = i;
+    let product = 1;
+    while (j < arr.length) {
+      product *= arr[j];
+      if (product < target) {
+        result.push(arr.slice(i, j + 1));
+        j++;
+      } else {
+        break;
+      }
+    }
+  }
+  return result;
+}
+console.log(findSubarrays([8, 2, 6, 5], 50));
+
+//Dutch National Flag Problem
+function sortFlag(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      let temp = 0;
+      if (arr[i] > arr[j]) {
+        temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+      }
+    }
+  }
+  return arr;
+}
+
+console.log(sortFlag([2, 2, 0, 1, 2, 0]));
+
+//Quadruple Sum to Target
+function searchQuadruplets(arr, target) {
+  const quadruplets = [];
+  arr.sort((a, b) => a - b);
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      let left = j + 1;
+      let right = arr.length - 1;
+      while (left < right) {
+        const sum = arr[i] + arr[j] + arr[left] + arr[right];
+        if (sum === target) {
+          quadruplets.push([arr[i], arr[j], arr[left], arr[right]]);
+          left++;
+          right--;
+        } else if (sum < target) {
+          left++;
+        } else {
+          right--;
+        }
+      }
+    }
+  }
+  return quadruplets;
+}
+console.log(searchQuadruplets([4, 1, 2, -1, 1, -3], 1));
+
+//Comparing Strings containing Backspaces
+const applyBackspaces = (str) => {
+  const arr = str.split("");
+  let i = 0;
+  while (i < arr.length) {
+    if (arr[i] === "#") {
+      arr.splice(i, 1);
+      if (i > 0) {
+        arr.splice(i - 1, 1);
+        i--;
+      }
+    } else {
+      i++;
+    }
+  }
+  return arr.join("");
+};
+
+function compareStrings(str1, str2) {
+  return applyBackspaces(str1) === applyBackspaces(str2);
+}
+console.log(compareStrings("xp#", "xyz##"));
