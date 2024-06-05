@@ -405,3 +405,34 @@ function compareStrings(str1, str2) {
   return applyBackspaces(str1) === applyBackspaces(str2);
 }
 console.log(compareStrings("xp#", "xyz##"));
+
+//Minimum Window Sort
+function subArray(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+  let min = 0;
+  let max = 0;
+
+  while (left < right && arr[left] <= arr[left + 1]) {
+    left++;
+  }
+  if (left === right) return 0;
+
+  while (right > 0 && arr[right] >= arr[right - 1]) {
+    right--;
+  }
+  for (let i = left; i < right + 1; i++) {
+    min = Math.min(arr[i]);
+    max = Math.max(arr[i]);
+  }
+
+  while (left > 0 && arr[left - 1] > min) {
+    left--;
+  }
+
+  while (right < arr.length - 1 && arr[right + 1] < max) {
+    right++;
+  }
+  return right - left + 1;
+}
+console.log(subArray([1, 2, 3]));
