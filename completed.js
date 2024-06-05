@@ -436,3 +436,139 @@ function subArray(arr) {
   return right - left + 1;
 }
 console.log(subArray([1, 2, 3]));
+
+// LinkedList Cycle
+class Node {
+  constructor(value, next = null) {
+    this.value = value;
+    this.next = next;
+  }
+}
+
+function hasCycle(head) {
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    slow = slow.next;
+    if (slow === fast) {
+      return true;
+    }
+  }
+
+  return false;
+}
+head = new Node(1);
+head.next = new Node(2);
+head.next.next = new Node(3);
+head.next.next.next = new Node(4);
+head.next.next.next.next = new Node(5);
+head.next.next.next.next.next = new Node(6);
+head.next.next.next.next.next.next = head.next.next;
+console.log(`LinkedList has cycle: ${hasCycle(head)}`);
+
+// Middle of the LinkedList
+class Node {
+  constructor(value, next = null) {
+    this.value = value;
+    this.next = next;
+  }
+}
+function midNode(slow) {
+  let current = slow;
+  let cycle = 0;
+  while (true) {
+    current = current.next;
+    cycle++;
+    if (current === slow) {
+      break;
+    }
+  }
+  return cycle % 2 !== 0 ? cycle / 2 : cycle / 2 + 1;
+}
+
+function middleNode(head) {
+  let slow = head;
+  let fast = head;
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    slow = slow.next;
+    if (slow === fast) {
+      return midNode(slow);
+    }
+  }
+  return slow;
+}
+
+head = new Node(1);
+head.next = new Node(2);
+head.next.next = new Node(3);
+head.next.next.next = new Node(4);
+head.next.next.next.next = new Node(5);
+head.next.next.next.next.next = new Node(6);
+// head.next.next.next.next.next.next = new Node(7);
+const middle = middleNode(head);
+console.log(middle.value);
+
+// Start of LinkedList Cycle
+class Node {
+  constructor(value, next = null) {
+    this.value = value;
+    this.next = next;
+  }
+}
+
+function cycleLength(slow) {
+  let current = slow;
+  let cycle = 0;
+
+  while (true) {
+    current = current.next;
+    cycle++;
+    if (current === slow) {
+      break;
+    }
+  }
+  return cycle;
+}
+
+function findStart(head, cycle) {
+  let pointer1 = head;
+  let pointer2 = head;
+
+  while (cycle > 0) {
+    pointer2 = pointer2.next;
+    cycle--;
+  }
+
+  while (pointer1 !== pointer2) {
+    pointer1 = pointer1.next;
+    pointer2 = pointer2.next;
+  }
+  return pointer1;
+}
+
+function startingCycleNode(head) {
+  let slow = head;
+  let fast = head;
+  let cycle = 0;
+
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
+    slow = slow.next;
+    if (slow === fast) {
+      cycle = cycleLength(slow);
+      break;
+    }
+  }
+  return findStart(head, cycle);
+}
+
+head = new Node(8);
+head.next = new Node(2);
+head.next.next = new Node(3);
+head.next.next.next = new Node(4);
+head.next.next.next.next = new Node(5);
+const starting = startingCycleNode(head);
+console.log(starting);
